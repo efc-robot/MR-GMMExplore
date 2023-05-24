@@ -1,0 +1,14 @@
+<launch>
+
+<param name="/use_sim_time" value="true" />
+
+<node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 map odom 100" />
+<node pkg="gmm_map_python" name="Submap_building" type="Submap_building" output="screen" required="true"/>
+
+<!-- <node pkg="submap" name="rviz_gmm" type="basic_shapes" output="screen" required="true"/> -->
+<node pkg="gmm_map_python" name="talker" type="gmm_transform.py" output="screen" required="true"/>
+<node pkg="gmm_map_python" name="visualgmm" type="visualgmm.py" output="screen" required="true"/>
+<node pkg="gmm_map_python" name="gmm_nav" type="gmm_nav.py" output="screen" required="true"/>
+<node pkg="rviz" name="rvizview" type="rviz" output="screen" args="-d $(find gmm_map_python)/rviz/$(arg robot_name).rviz" required="false"/>
+
+</launch>
